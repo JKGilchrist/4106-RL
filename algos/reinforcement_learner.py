@@ -145,7 +145,6 @@ class reinforcementLearner:
 
         self.model.train(attributes, targets)
 
-
     '''
     Renders a single game. Not involved in gathering data/training process
     '''
@@ -207,10 +206,10 @@ if __name__ == "__main__":
         print("Loaded saved model, {}".format(filename))
     except:
         print("Creating new model")
-        rl = reinforcementLearner(50, int(sys.argv[1]), 20) #initial score threshold, NN type, score threshold increase amount
+        rl = reinforcementLearner(50, int(sys.argv[1]), 20) #initial score threshold, NN type, score threshold increase amount. May be a bit steep atm
     
     #Train!
-    rl.train_repeatedly(0.5) #Max time spent in one interation gathering data
+    rl.train_repeatedly(0.5) #Max time spent in one interation gathering data. May be a bit steep atm
 
     #save the model
     pickle.dump(rl, open(filename, "wb"  ) )
