@@ -50,6 +50,6 @@ class Training_Data_Collector:
         return stats
 
     def at_target(self):
-        if len(self.accepted_scores) < self.target_good_games:
+        if len(self.accepted_scores) < self.target_good_games or len(self.scores) < 100:
             return False
         return True
