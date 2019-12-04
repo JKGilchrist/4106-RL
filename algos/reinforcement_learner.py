@@ -149,13 +149,13 @@ class reinforcementLearner:
                 break
             
             self.env.reset()
-            self.env._max_episode_steps = 500
+            self.env._max_episode_steps = 500 #Default is 200 which is too low
             prev_observation = []
             game_memory = []
             score = 0
             num_games += 1
 
-            while True: #Plays until the game is done
+            while True: #Plays until the game is done. Max is 500 frames
 
                 if len(prev_observation) and self.model: #If there's a prev observation and the model exists 
                     action = self.model.predict(prev_observation)[0]
