@@ -248,7 +248,7 @@ class reinforcementLearner:
             if self.type_NN == 1:
                 self.model = logistic_regression()
             if self.type_NN == 2:
-                self.model = None #TODO ...
+                self.model = multi_layer_perceptron()
             if self.type_NN == 3:
                 self.model = None #TODO
 
