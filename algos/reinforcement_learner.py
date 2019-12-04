@@ -38,7 +38,7 @@ class reinforcementLearner:
     @param max_minutes is the maximum number of minutes to allow for a session of playing games to gather data to train on. If it's surpassed, then the model has finished being trained.  
     @param iter_cap is a hard max on the number of iterations it is allowed to train for. It may not be reached if max_minutes is reached first.
     @param max_decreases_in_a_row is a limit on how many iterations can the average game score decrease before training should stop.
-    @param min_epochs is the minimum number of epochs that should occur. More may be performed.
+    @param min_epochs is the minimum number of epochs that should occur. More (max of 100) may be performed.
     '''
     def train_repeatedly(self, max_minutes = 5, iter_cap = -1, max_decreases_in_a_row = 3, min_epochs = 30):
 
@@ -259,8 +259,7 @@ class reinforcementLearner:
     '''
     def view_a_game(self):
         start_time = datetime.datetime.now()   
-        print("\n~~~~~~~~~~~~~~~")
-        print("Playing and rendering a single game\n")     
+        print("\n~~~~~~~~~~~~~~~\nPlaying and rendering a single game\n")     
         print("Start time:", start_time)
         self.env.reset()
         prev_observation = []

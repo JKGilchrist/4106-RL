@@ -7,7 +7,7 @@ class logistic_regression:
     def __init__(self, model=False):
         self.clf = LogisticRegression(solver='lbfgs', multi_class="multinomial", max_iter=1000, random_state=1)
 
-    def train(self, df_attributes, df_target, epochs=30): #10 was too little. 100 took too long. 50 seems reasonable.
+    def train(self, df_attributes, df_target, epochs=30): 
         print("Started training: {}".format(str(datetime.datetime.now())))
         for _ in range(0, int(epochs)):
             self.clf.fit(df_attributes, df_target)
