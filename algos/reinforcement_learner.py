@@ -7,6 +7,7 @@ import sys
 
 from log_reg import logistic_regression
 from support import Training_Data_Collector
+from sklearn.linear_model import LogisticRegression
 #TODO add your imports
 
 
