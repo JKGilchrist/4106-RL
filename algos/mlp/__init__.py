@@ -1,3 +1,3 @@
 from sklearn.neural_network import MLPClassifier
 
-__all__ = ["multi-layer perceptron"]
+__all__ = ["multi_layer_perceptron"]
