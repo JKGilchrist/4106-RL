@@ -6,6 +6,7 @@ import pickle
 import sys
 
 from log_reg import logistic_regression
+from rnn import recurrent_neural_net
 from support import Training_Data_Collector
 #TODO add your imports
 
@@ -250,7 +251,7 @@ class reinforcementLearner:
             if self.type_NN == 2:
                 self.model = multi_layer_perceptron()
             if self.type_NN == 3:
-                self.model = None #TODO
+                self.model = recurrent_neural_net()
 
         self.model.train(attributes, targets, epochs)
 
