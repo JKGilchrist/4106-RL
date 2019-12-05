@@ -7,7 +7,7 @@ import sys
 
 from log_reg import logistic_regression
 from support import Training_Data_Collector
-from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 #TODO add your imports
 
 
