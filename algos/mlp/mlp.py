@@ -17,7 +17,7 @@ class multi_layer_perceptron:
     def predict(self, prev_state):
         scores = []
         for x in prev_state:
-            score = self.score(x)
+            score = self.clf.score(x[0], x[1])
             scores.append(score)
         return scores
         
