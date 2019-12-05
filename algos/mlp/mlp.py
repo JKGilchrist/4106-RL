@@ -17,8 +17,14 @@ class multi_layer_perceptron:
 
 
     def predict(self, prev_state):
+        #for x in prev_state:
+            #score = self.clf.score(x.df_attributes, x.df_target)
+            #scores.append(score)
+        lst = []
         for x in prev_state:
-            score = self.clf.score(x.df_attributes, x.df_target)
-            scores.append(score)
-        return scores
+            lst.append(x)
+
+        predicted = self.clf.predict([lst])
+        
+        return predicted
         
