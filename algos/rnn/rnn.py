@@ -47,7 +47,7 @@ class recurrent_neural_net:
     def train(self, df_attributes, df_target, epochs=100): 
         print("Started training: {}".format(str(datetime.datetime.now())))
         for i in range(int(epochs)):
-            self.model.fit(df_attributes, df_target)
+            self.model.fit(np.asarray(df_attributes), np.asarray(df_target))
         print("Finished training: {}".format(str(datetime.datetime.now())))
     
 
