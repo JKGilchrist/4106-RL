@@ -8,6 +8,7 @@ import sys
 from log_reg import logistic_regression
 from rnn import recurrent_neural_net
 from support import Training_Data_Collector
+from sklearn.neural_network import MLPClassifier
 #TODO add your imports
 
 
