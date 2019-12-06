@@ -301,7 +301,7 @@ if __name__ == "__main__":
     if int(sys.argv[1]) == 1:
         filename = "rl_lr.obj"
     elif int(sys.argv[1]) == 2:
-        filename = "rl_cnn.obj"
+        filename = "rl_mlp.obj"
     elif int(sys.argv[1]) == 3:
         filename = "rl_rnn.obj"
     else:
