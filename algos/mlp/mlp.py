@@ -13,7 +13,6 @@ class multi_layer_perceptron:
         scores = []
         for i in range(1, epochs + 1):
             self.clf.fit(df_attributes, df_target)
-            i+=1
 
 
     def predict(self, prev_state):
