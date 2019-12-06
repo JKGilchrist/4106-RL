@@ -22,7 +22,7 @@ class reinforcementLearner:
     Constructor.
 
     @param initial_threshold establishes the first minimum score for good games, that will be used to train
-    @param type_NN indicates which NN to use (1 is logistic regression, 2 is TODO fill in, 3 is TODO fill in )
+    @param type_NN indicates which NN to use (1 is logistic regression, 2 is Multi-layer Perceptron, 3 is Recurrent Neural Net)
     @param score_increase indicates the minimum amount of how much the threshold should increase by with each iteration
     '''
     def __init__(self, initial_threshold = 30, type_NN = 1, score_increase = 5):
