@@ -1,28 +1,48 @@
 # 4106-RL
 
-After an absurd amount of time, here's how to set up so we can easily work together.
+A repository for our CSI4106 final project: creating a reinforcement model to play a game, using varied NNs within it.
 
-This environment should be able to handle developing RL algorithms to run on any of the [openai default environments](https://github.com/openai/gym/wiki/Table-of-environments?fbclid=IwAR013H67TnteguyIg3gW5ASQ_RxoBCowMWVBSIXec0-pymVGnXF-msVLbp4) on Windows.
+This project is designed to work in the given Anaconda environment, on Windows.  
 
-Currently, none of the atari ones work. 
+## Creating/using the models
+
+Currently, all of the work we've really done can be found in the directory algos.
+
+You can run an entirely random game using
+
+```
+python reinforcement_learner.py
+```
+
+Otherwise, to create the individual models using the following
+
+```
+python reinforcement_learner.py {1|2|3} [maximum minutes] [maximum iterations] [maximum decreases in a row] [minimum number of epochs]
+```
+The [] are optional arguments, which indicate what they specify. Maximum minutes refers to the maximum number of minutes a single iteration of gathering data is allotted to gather said data. Each has a default value and so can be omitted as preferred.
+
+As for the first argument, 
+1 - Use Logistic regression
+2 - Use MLP
+3 - Use RNN
+
 
 ## Set up
-1. You need Anaconda (and not docker, apparently)
+1. If needed, install Anaconda
 
-To install Anaconda (Windows), first uninstall all of python. Also, remove all python user/system variables.
+If you already have some versions of python installed, first uninstall them and remove all python user/system variables.
 
 Next, download [Anaconda](https://www.anaconda.com/distribution/#download-section) 3.7, 64-bit. Install for all users (otherwise, you'll have issues with doing jupyter notebook stuff, external to this project), and let it add the variables.
 
-
-2. Clone this repo, then navigate to it in cmd
-
-execute the following. It will probably take a while. 
+2. Set up the environment
+First, clone this repo, then navigate to it in a terminal.
+Execute the following. It will probably take a while. 
 
 ```
 conda env create --file environment.yml
 ```
 
-Now, when you do the following
+Now, when you do the following command,
 
 ```
 conda env list
@@ -45,8 +65,7 @@ And to make sure it's all good to go:
 python test.py
 ```
 
-Currently, the only way to end the program is to shut down the executing program and close the display separately. 
-
+This tests
 
 ## To exit
 
@@ -54,26 +73,3 @@ Currently, the only way to end the program is to shut down the executing program
 conda deactivate
 ```
 
-
-
-
-## Other
-
-Download http://www.msys2.org/ (x86-64)
-
-within its terminal, run
-```
-pacman -Su
-```
-
-then run
-```
-pacman -S base-devel mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake
-```
-with all. 
-
-## References
-https://github.com/j8lp/atari-py
-http://www.msys2.org/
-http://ronny.rest/tutorials/module/openai_001/openai_first_test/?fbclid=IwAR3ppq-jZXdK82_wUcWLCiZdvP4vepaIcEcvTf9rSjBV2rp8CNvDdfD9Q-g
-(Book, uottawa online resource) Hands-On Reinforcement Learning with Python: Master reinforcement and deep reinforcement learning using OpenAI Gym and TensorFlow By Sudharsan Ravichandiran

@@ -7,9 +7,9 @@ import sys
 
 from log_reg import logistic_regression
 from rnn import recurrent_neural_net
-from support import Training_Data_Collector
 from mlp import multi_layer_perceptron
-#TODO add your imports
+
+from support import Training_Data_Collector
 
 
 '''
@@ -63,7 +63,7 @@ class reinforcementLearner:
                         epochs = (self.avg_game_scores[-1] - self.avg_game_scores[-2]) * 2
                         epochs = min(epochs, 100) #Arbitrary limit to avoid overtraining, even if the average game score has dramatically increased.
                     epochs = max(min_epochs, epochs)
-                    print("Performing {} number of epochs".format(epochs))
+                    print("Performing {} epochs".format(epochs))
                     self.train_model(attri, tar, epochs)
                 
                 stop = self.check_for_decreases(max_decreases_in_a_row)
@@ -87,7 +87,7 @@ class reinforcementLearner:
                     epochs = self.avg_game_scores[-1] - self.avg_game_scores[-2]
                     epochs = min(epochs, 100) #Arbitrary limit to avoid overtraining, even if the average game score has dramatically increased.
                 epochs = max(min_epochs, epochs)
-                print("Performing {} number of epochs".format(epochs))
+                print("Performing {} epochs".format(epochs))
                 self.train_model(attri, tar, epochs)
                 
                 stop = self.check_for_decreases(max_decreases_in_a_row)
@@ -276,7 +276,6 @@ class reinforcementLearner:
                 action = self.env.action_space.sample() #Selects a random action
                 
             observation, reward, done, _info = self.env.step( action ) #Performs said action
-                
             prev_observation = observation
                 
             score += reward
@@ -295,38 +294,69 @@ class reinforcementLearner:
     def close(self):
         self.env.close()
 
+
+
+
 if __name__ == "__main__":
 
-    #Determines which NN to use
-    if int(sys.argv[1]) == 1:
-        filename = "rl_lr.obj"
-    elif int(sys.argv[1]) == 2:
-        filename = "rl_mlp.obj"
-    elif int(sys.argv[1]) == 3:
-        filename = "rl_rnn.obj"
+    #Play randomly
+    if len(sys.argv) == 1:
+        rl = reinforcementLearner(0,  0, 20) 
+        rl.view_a_game()
+        rl.close()
+
+    #use specific NN
     else:
-        raise Exception("Indicate which NN to use")
-
-    #Tries to open previous file
-    try:
-        filehandler = open(filename, 'rb')
-        rl = pickle.load( filehandler )
-        print("Loaded saved model, {}".format(filename))
-    except:
-        print("Creating new model, {}".format(filename))
+        #Determines which NN to use
+        if int(sys.argv[1]) == 1:
+            filename = "rl_lr.obj"
+        elif int(sys.argv[1]) == 2:
+            filename = "rl_mlp.obj"
+        else: #Should be 3
+            filename = "rl_rnn.obj"
         
-        rl = reinforcementLearner(initial_threshold = 30, type_NN = int(sys.argv[1]), score_increase = 20) 
+
+            
+
+        #Tries to open previous file
+        try:
+            filehandler = open(filename, 'rb')
+            rl = pickle.load( filehandler )
+            print("Loaded saved model, {}".format(filename))
+        except:
+            print("Creating new model, {}".format(filename))
+            
+            rl = reinforcementLearner(initial_threshold = 30, type_NN = int(sys.argv[1]), score_increase = 20) 
+            
+        #View an initial game
+        #rl.view_a_game()
+
+
+        max_min = 1.5
+        iter_cap = 10
+        max_decreases = 3
+        min_epochs = 30
+
+        #Train!
+        try:
+            if sys.argv[2]:
+                max_min = float(sys.argv[2])
+            if sys.argv[3]:
+                iter_cap = int (sys.argv[3])
+            if sys.argv[4]:
+                max_decreases = int(sys.argv[4])
+            if sys.argv[5]:
+                print("H")
+                min_epochs = int (sys.argv[5])
+        except:
+            pass
+
+        rl.train_repeatedly(max_minutes = max_min, iter_cap = iter_cap, max_decreases_in_a_row = max_decreases, min_epochs = int(min_epochs)) 
         
-    #View an initial game
-    #rl.view_a_game()
+        #save the model
+        pickle.dump(rl, open(filename, "wb"  ) )
+        print("\nSaved trained model, {}".format(filename))
 
-    #Train!
-    rl.train_repeatedly(max_minutes = 1.5, iter_cap = 10, max_decreases_in_a_row = 3, min_epochs = 30) 
-    
-    #save the model
-    pickle.dump(rl, open(filename, "wb"  ) )
-    print("\nSaved trained model, {}".format(filename))
-
-    #watch it play
-    rl.view_a_game()
-    rl.close()
+        #watch it play
+        rl.view_a_game()
+        rl.close()

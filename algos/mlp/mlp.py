@@ -3,6 +3,7 @@ import sklearn
 import matplotlib.pyplot as plt
 from sklearn.neural_network import MLPClassifier
 import random
+import datetime
 
 class multi_layer_perceptron:
     
@@ -11,9 +12,10 @@ class multi_layer_perceptron:
 
     def train(self, df_attributes, df_target, epochs=50):
         scores = []
-        for i in range(1, epochs + 1):
+        print("Started training: {}".format(str(datetime.datetime.now())))
+        for i in range(1, int(epochs) + 1):
             self.clf.fit(df_attributes, df_target)
-
+        print("Finished training: {}".format(str(datetime.datetime.now())))
 
     def predict(self, prev_state):
         #for x in prev_state:
